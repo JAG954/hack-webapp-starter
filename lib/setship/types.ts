@@ -146,6 +146,10 @@ export interface InventoryMatrixRow {
   qty_required: number;
   is_missing: boolean;
   is_bottleneck: boolean;
+  // Carried over from RequiredComponent so the risk-scoring agent can
+  // reason about damage exposure (large parcel + fragile) per row.
+  large_parcel: boolean;
+  fragile: boolean;
   cells: InventoryCell[];
 }
 

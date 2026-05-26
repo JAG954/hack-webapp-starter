@@ -193,6 +193,8 @@ export function componentAvailabilityAgent(orderContext: ReturnType<typeof order
         is_bottleneck:
           preferredAvailability.available < component.qty_required &&
           fallbackAvailability.length > 0,
+        large_parcel: component.large_parcel,
+        fragile: component.fragile,
         cells,
       };
     },

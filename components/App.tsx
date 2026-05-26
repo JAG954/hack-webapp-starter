@@ -21,6 +21,15 @@ export function App() {
   useEffect(() => {
     let cancelled = false;
 
+    // Deep-link from the SetShip dashboard order drawer:
+    //   /evaluate?order=ORD-1042
+    // If the requested id is in the orders list, it wins; otherwise we
+    // fall back to the first order (preserving original behavior).
+    const requestedOrderId =
+      typeof window !== "undefined"
+        ? new URLSearchParams(window.location.search).get("order") || ""
+        : "";
+
     async function loadOrders() {
       setIsLoadingOrders(true);
       setError("");
@@ -35,7 +44,12 @@ export function App() {
         if (cancelled) return;
 
         setOrders(payload);
-        setSelectedOrderId((current) => current || payload[0]?.order_id || "");
+        setSelectedOrderId((current) => {
+          if (current) return current;
+          const matched = payload.find((o) => o.order_id === requestedOrderId);
+          if (matched) return matched.order_id;
+          return payload[0]?.order_id || "";
+        });
       } catch (loadError) {
         if (cancelled) return;
         setError(loadError instanceof Error ? loadError.message : "Failed to load orders.");

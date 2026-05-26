@@ -1,4 +1,4 @@
-import { App } from "@/components/App";
+import App from "@/src/App.jsx";
 
 export default function Home() {
   return <App />;

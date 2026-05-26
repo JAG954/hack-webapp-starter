@@ -2,9 +2,31 @@
 
 import { useChat } from "@ai-sdk/react";
 import { DefaultChatTransport, type UIMessage } from "ai";
-import { useMemo, useRef, useState } from "react";
+import { useEffect, useMemo, useRef, useState } from "react";
+import SiteHeader from "@/src/components/SiteHeader.jsx";
 
 type Mode = "chat" | "agent";
+
+// SetShip-themed seed prompts shown in the empty state. These nudge
+// hackathon demos toward the furniture-set supply-chain story.
+const SEED_PROMPTS: { mode: Mode; text: string }[] = [
+  {
+    mode: "chat",
+    text: "Why is order WF-104238 split-ship instead of single-ship?",
+  },
+  {
+    mode: "chat",
+    text: "Which suppliers are driving today's red exception queue?",
+  },
+  {
+    mode: "agent",
+    text: "Run a root-cause pass on the Halden Sectional backorder and propose two recovery paths.",
+  },
+  {
+    mode: "agent",
+    text: "Audit our top 5 component bottlenecks and recommend where to pre-position inventory next quarter.",
+  },
+];
 
 function fileToDataUrl(file: File): Promise<string> {
   return new Promise((resolve, reject) => {
@@ -68,6 +90,25 @@ export function ChatApp() {
   const [imageFile, setImageFile] = useState<File | null>(null);
   const fileInputRef = useRef<HTMLInputElement>(null);
 
+  // Deep-link from the dashboard order drawer: /chat?prefill=<text>&mode=agent
+  // Reading from window.location keeps this page statically renderable
+  // (useSearchParams would force a Suspense boundary + dynamic render).
+  // The state updates are deferred through setTimeout(_, 0) so they don't
+  // fire synchronously inside the effect body (react-hooks/set-state-in-effect).
+  useEffect(() => {
+    if (typeof window === "undefined") return;
+    const params = new URLSearchParams(window.location.search);
+    const prefill = params.get("prefill");
+    const requestedMode = params.get("mode");
+    const timer = setTimeout(() => {
+      if (prefill) setInput(prefill);
+      if (requestedMode === "agent" || requestedMode === "chat") {
+        setMode(requestedMode);
+      }
+    }, 0);
+    return () => clearTimeout(timer);
+  }, []);
+
   const transport = useMemo(
     () =>
       new DefaultChatTransport({
@@ -80,6 +121,8 @@ export function ChatApp() {
   const { messages, sendMessage, status, error, stop } = useChat({ transport });
 
   const isBusy = status === "streaming" || status === "submitted";
+
+  const visibleSeeds = SEED_PROMPTS.filter((p) => p.mode === mode);
 
   async function handleSubmit(event: React.FormEvent) {
     event.preventDefault();
@@ -110,67 +153,51 @@ export function ChatApp() {
     if (fileInputRef.current) fileInputRef.current.value = "";
   }
 
+  const modeToggle = (
+    <div className="flex rounded-full border border-zinc-800 bg-zinc-950 p-1">
+      <button
+        type="button"
+        onClick={() => setMode("chat")}
+        className={`rounded-full px-3 py-1 text-xs font-medium transition ${
+          mode === "chat"
+            ? "bg-[#FF5C28] text-black"
+            : "text-zinc-400 hover:text-white"
+        }`}
+      >
+        Chat
+      </button>
+      <button
+        type="button"
+        onClick={() => setMode("agent")}
+        className={`rounded-full px-3 py-1 text-xs font-medium transition ${
+          mode === "agent"
+            ? "bg-[#FF5C28] text-black"
+            : "text-zinc-400 hover:text-white"
+        }`}
+      >
+        Agent
+      </button>
+    </div>
+  );
+
   return (
     <div className="flex min-h-full flex-col bg-black">
-      <header className="border-b border-zinc-800 bg-black">
-        <div className="mx-auto flex max-w-5xl flex-col gap-4 px-4 py-5 sm:flex-row sm:items-center sm:justify-between">
-          <div>
-            <p className="text-xs font-medium uppercase tracking-wider text-[#FF5C28]">
-              Hackathon Starter
-            </p>
-            <h1 className="text-xl font-semibold tracking-tight text-white">
-              Chat + Agents on Subconscious
-            </h1>
-            <p className="mt-1 text-sm text-zinc-400">
-              Wayfair · Subconscious · Baseten · Cloudflare
-            </p>
-          </div>
-
-          <div className="flex rounded-full border border-zinc-800 bg-zinc-950 p-1">
-            <button
-              type="button"
-              onClick={() => setMode("chat")}
-              className={`rounded-full px-4 py-1.5 text-sm font-medium transition ${
-                mode === "chat"
-                  ? "bg-[#FF5C28] text-black"
-                  : "text-zinc-400 hover:text-white"
-              }`}
-            >
-              Chat
-            </button>
-            <button
-              type="button"
-              onClick={() => setMode("agent")}
-              className={`rounded-full px-4 py-1.5 text-sm font-medium transition ${
-                mode === "agent"
-                  ? "bg-[#FF5C28] text-black"
-                  : "text-zinc-400 hover:text-white"
-              }`}
-            >
-              Agent
-            </button>
-          </div>
-        </div>
-      </header>
+      <SiteHeader subtitle="Agent Workspace" actions={modeToggle} />
 
       <main className="mx-auto flex w-full max-w-5xl flex-1 flex-col px-4 py-6">
         <div className="mb-4 rounded-xl border border-zinc-800 bg-zinc-950 p-4 text-sm text-zinc-400">
           {mode === "chat" ? (
             <p>
               <span className="font-medium text-[#FF5C28]">Chat mode</span> — fast
-              replies with basic tools. Attach an image for multimodal reasoning
-              (use data URLs; see{" "}
-              <code className="rounded bg-zinc-900 px-1 text-zinc-200">
-                lib/subconscious.ts
-              </code>
-              ).
+              answers about a specific order, supplier, or component. Best for
+              follow-ups from the dashboard (open an order &rarr; “Ask the
+              agent”).
             </p>
           ) : (
             <p>
               <span className="font-medium text-[#FF5C28]">Agent mode</span> —
-              long-running multi-step agent with web search, background tasks, and
-              MCP tool stubs. Kick off research and let it run up to 30 tool
-              steps.
+              multi-step fulfillment reasoning: bottleneck root-cause, supplier
+              recovery plans, inventory rebalancing. Up to 30 tool steps.
             </p>
           )}
         </div>
@@ -179,16 +206,23 @@ export function ChatApp() {
           {messages.length === 0 && (
             <div className="flex h-full min-h-[320px] flex-col items-center justify-center text-center text-zinc-500">
               <p className="text-lg font-medium text-zinc-200">
-                Try something to get started
+                Ask the SetShip agent
               </p>
-              <ul className="mt-4 max-w-md space-y-2 text-sm">
-                <li>“What&apos;s the weather in Boston?”</li>
-                <li>“Calculate (17 * 23) + 100”</li>
-                <li>Attach a screenshot and ask what you see</li>
-                <li>
-                  Switch to Agent: “Research hackathon project ideas for retail
-                  AI”
-                </li>
+              <p className="mt-1 text-xs text-zinc-500">
+                Try a fulfillment question, or open an order from the dashboard.
+              </p>
+              <ul className="mt-4 grid w-full max-w-xl gap-2 text-left text-sm">
+                {visibleSeeds.map((seed) => (
+                  <li key={seed.text}>
+                    <button
+                      type="button"
+                      onClick={() => setInput(seed.text)}
+                      className="w-full rounded-lg border border-zinc-800 bg-zinc-900/50 px-3 py-2 text-zinc-200 transition hover:border-[#FF5C28] hover:text-[#FF5C28]"
+                    >
+                      {seed.text}
+                    </button>
+                  </li>
+                ))}
               </ul>
             </div>
           )}
