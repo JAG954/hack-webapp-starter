@@ -1,0 +1,32 @@
+node_id,component_sku,on_hand,reserved,last_update_hours_ago,inventory_quality_note
+CG_NJ,TABLETOP-01,2,0,2,fresh warehouse count
+CG_NJ,LEG-01,20,4,2,fresh warehouse count
+CG_NJ,CHAIR-01,4,0,2,fresh warehouse count
+CG_NJ,HW-01,0,0,2,missing blocker component
+CG_KY,TABLETOP-01,6,2,3,available backup inventory
+CG_KY,LEG-01,8,0,3,available backup inventory
+CG_KY,CHAIR-01,12,0,3,available backup inventory
+CG_KY,HW-01,3,0,3,available blocker component
+SUP_A,TABLETOP-01,20,5,31,stale supplier feed
+SUP_A,LEG-01,40,0,31,stale supplier feed
+SUP_A,HW-01,50,0,31,stale supplier feed
+SUP_B,LEG-01,100,20,6,fresh supplier feed
+SUP_B,SLAT-01,0,0,6,currently out of stock
+SUP_C,CHAIR-01,30,10,6,fresh supplier feed
+CG_NJ,HEADBOARD-01,1,0,2,fresh warehouse count
+CG_NJ,FOOTBOARD-01,1,0,2,fresh warehouse count
+CG_NJ,RAIL-01,1,0,2,fresh warehouse count
+CG_NJ,SLAT-01,0,0,2,missing blocker component
+CG_NJ,HW-02,2,0,2,fresh warehouse count
+SUP_A,SLAT-01,8,0,31,stale but inbound PO already confirmed
+CG_GA,SOFA-BASE-01,1,0,2,fresh warehouse count
+CG_GA,CUSHION-01,0,0,2,missing comfort component
+CG_GA,SOFA-LEG-01,4,0,2,fresh warehouse count
+CG_GA,HW-03,3,0,2,fresh warehouse count
+SUP_C,CUSHION-01,5,0,4,fresh supplier feed
+CG_KY,DESKTOP-01,1,0,3,fresh warehouse count
+CG_KY,FRAME-01,1,0,3,fresh warehouse count
+CG_KY,DRAWER-01,0,0,3,missing blocker component
+CG_KY,HW-04,1,0,3,fresh warehouse count
+SUP_D,DRAWER-01,6,0,52,very stale supplier feed
+SUP_D,HW-04,30,10,52,very stale supplier feed

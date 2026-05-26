@@ -1,0 +1,15 @@
+from_node,to_node,transit_days,base_cost,large_parcel_supported,damage_risk,notes
+CG_KY,CG_NJ,1,18,true,0.03,CastleGate transfer lane
+CG_NJ,CG_KY,1,18,true,0.03,CastleGate transfer lane
+CG_GA,CG_NJ,2,28,true,0.04,CastleGate transfer lane
+SUP_A,CG_NJ,3,24,true,0.07,Supplier to CastleGate inbound lane
+SUP_B,CG_NJ,2,20,true,0.05,Supplier to CastleGate inbound lane
+SUP_C,CG_GA,1,16,true,0.04,Supplier to CastleGate inbound lane
+SUP_D,CG_KY,3,22,false,0.08,Small supplier inbound lane; not reliable for large parcel
+CG_NJ,CUSTOMER_NE,1,20,true,0.04,Preferred Northeast final-mile lane
+CG_KY,CUSTOMER_NE,3,35,true,0.06,Backup node to Northeast customer
+SUP_A,CUSTOMER_NE,4,30,true,0.09,Supplier-direct Northeast lane
+CG_GA,CUSTOMER_SE,1,18,true,0.04,Preferred Southeast final-mile lane
+SUP_C,CUSTOMER_SE,1,14,true,0.04,Supplier-direct Southeast lane
+CG_KY,CUSTOMER_MW,1,18,true,0.04,Preferred Midwest final-mile lane
+SUP_D,CUSTOMER_MW,3,25,false,0.10,Supplier-direct Midwest lane with limited large-parcel support

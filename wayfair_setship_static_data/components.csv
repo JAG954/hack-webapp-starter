@@ -1,0 +1,18 @@
+component_sku,component_name,component_type,unit_weight_class,large_parcel,fragile,substitutable,notes
+TABLETOP-01,Oak Tabletop,table_part,heavy,true,true,false,Damage-prone oversized surface
+LEG-01,Table Leg Pack,table_part,small,false,false,true,Can be sourced from alternate supplier
+CHAIR-01,Dining Chair,chair,heavy,true,true,false,Large parcel and damage-prone
+HW-01,Dining Hardware Kit,hardware,small,false,false,true,Small item that can block a full dining set
+HEADBOARD-01,Queen Headboard,bed_part,heavy,true,true,false,Large fragile component
+FOOTBOARD-01,Queen Footboard,bed_part,heavy,true,true,false,Large fragile component
+RAIL-01,Side Rail Pair,bed_part,medium,true,false,false,Long item requiring special handling
+SLAT-01,Slat Pack,bed_part,medium,true,false,true,Often missing or delayed
+HW-02,Bed Hardware Kit,hardware,small,false,false,true,Small item that blocks bed assembly
+SOFA-BASE-01,Sofa Base,sofa_part,heavy,true,true,false,Main large-parcel item
+CUSHION-01,Cushion Set,sofa_part,medium,true,false,true,Can ship separately with lower damage risk
+SOFA-LEG-01,Sofa Leg Pack,sofa_part,small,false,false,true,Small supporting part
+HW-03,Sofa Connector Kit,hardware,small,false,false,true,Small item for modular assembly
+DESKTOP-01,Desktop Panel,desk_part,medium,true,true,false,Main desk surface
+FRAME-01,Desk Frame,desk_part,medium,true,false,false,Metal frame
+DRAWER-01,Drawer Slide Kit,hardware,small,false,false,true,Small component with high stockout risk
+HW-04,Desk Hardware Kit,hardware,small,false,false,true,Small hardware kit

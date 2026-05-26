@@ -1,0 +1,5 @@
+po_id,supplier_id,destination_node,component_sku,qty,confirmed,eta_date,linked_order_id,notes
+PO-9001,SUP_A,CG_NJ,SLAT-01,12,true,2026-05-27,ORD-1043,Confirmed inbound slats can unblock bed order
+PO-9002,SUP_C,CG_GA,CUSHION-01,10,true,2026-05-29,ORD-1044,Too late for current promise if consolidated through CastleGate
+PO-9003,SUP_D,CG_KY,DRAWER-01,10,false,2026-05-29,ORD-1045,Unconfirmed and supplier feed is stale
+PO-9004,SUP_A,CG_NJ,HW-01,20,false,2026-05-30,ORD-1042,Unconfirmed supplier replenishment arrives too late to be safest option

@@ -1,0 +1,11 @@
+node_id,node_type,node_name,region,city,state,large_parcel_capable,notes
+CG_NJ,CastleGate,Northeast CastleGate,Northeast,Elizabeth,NJ,true,Preferred node for Northeast furniture-set orders
+CG_KY,CastleGate,Central CastleGate,Midwest,Erlanger,KY,true,Backup node with some component stock
+CG_GA,CastleGate,Southeast CastleGate,Southeast,Savannah,GA,true,Preferred node for Southeast orders
+SUP_A,Supplier,Oak Ridge Furnishings,Northeast,Scranton,PA,true,Supplier feed sometimes stale
+SUP_B,Supplier,Flatpack Components Co,Midwest,Columbus,OH,true,Usually reliable for flatpack components
+SUP_C,Supplier,Coastal Seating,Southeast,Charleston,SC,true,Strong seating supplier with fresh feeds
+SUP_D,Supplier,Urban Desk Parts,Midwest,Fort Wayne,IN,false,Small supplier with unreliable feeds
+CUSTOMER_NE,CustomerZone,Northeast Customer Zone,Northeast,Boston,MA,true,Customer destination abstraction
+CUSTOMER_MW,CustomerZone,Midwest Customer Zone,Midwest,Chicago,IL,true,Customer destination abstraction
+CUSTOMER_SE,CustomerZone,Southeast Customer Zone,Southeast,Atlanta,GA,true,Customer destination abstraction

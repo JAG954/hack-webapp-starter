@@ -1,0 +1,5 @@
+order_id,recommended_action,recommended_summary,main_bottleneck,confidence
+ORD-1042,reroute,Reroute HW-01 from CG_KY to CG_NJ and ship consolidated from CG_NJ.,HW-01,high
+ORD-1043,hold,Hold one day for confirmed inbound SLAT-01 and ship consolidated from CG_NJ.,SLAT-01,medium
+ORD-1044,split_ship,Approve split shipment: release CG_GA base/legs/hardware and ship CUSHION-01 direct from SUP_C.,CUSHION-01,medium
+ORD-1045,escalate,Escalate because DRAWER-01 is unavailable at CG_KY and supplier feed is stale with no reliable lane meeting promise.,DRAWER-01,high

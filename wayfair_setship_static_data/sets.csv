@@ -1,0 +1,5 @@
+set_sku,set_name,category,set_weight_class,assembly_required,large_parcel_count,customer_sensitivity
+DS-200,5-Piece Oak Dining Set,Dining Room,heavy,true,2,high
+BED-510,Queen Platform Bed Set,Bedroom,heavy,true,3,high
+SOFA-330,Modular Sofa Starter Set,Living Room,heavy,false,2,medium
+DESK-120,Compact Home Office Desk,Office,medium,true,1,medium

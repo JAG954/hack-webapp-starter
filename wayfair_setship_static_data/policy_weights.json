@@ -1,0 +1,14 @@
+{
+  "current_date": "2026-05-26",
+  "stale_feed_threshold_hours": 24,
+  "delay_penalty_per_day": 8,
+  "cost_penalty_per_dollar": 0.5,
+  "split_shipment_penalty": 10,
+  "stale_supplier_feed_penalty": 15,
+  "large_parcel_damage_penalty_multiplier": 12,
+  "promise_date_bonus": 10,
+  "consolidated_shipment_bonus": 8,
+  "supplier_high_risk_penalty": 20,
+  "supplier_medium_risk_penalty": 8,
+  "escalate_threshold_score": 50
+}

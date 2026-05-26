@@ -1,0 +1,5 @@
+order_id,order_date,promise_date,customer_zone,preferred_node,set_sku,qty_sets,priority,customer_note
+ORD-1042,2026-05-26,2026-05-30,CUSTOMER_NE,CG_NJ,DS-200,1,high,Customer expects full dining set before weekend
+ORD-1043,2026-05-26,2026-05-29,CUSTOMER_NE,CG_NJ,BED-510,1,medium,Customer can tolerate one-day warehouse hold but not split furniture delivery
+ORD-1044,2026-05-26,2026-05-28,CUSTOMER_SE,CG_GA,SOFA-330,1,high,Customer has close delivery window and cushions can arrive separately
+ORD-1045,2026-05-26,2026-05-27,CUSTOMER_MW,CG_KY,DESK-120,1,high,Expedited office setup with no delivery flexibility

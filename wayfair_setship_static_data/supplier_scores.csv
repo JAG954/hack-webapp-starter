@@ -1,0 +1,5 @@
+supplier_id,supplier_name,fill_rate,on_time_rate,damage_rate,feed_accuracy,last_update_hours_ago,risk_tier
+SUP_A,Oak Ridge Furnishings,0.82,0.76,0.08,0.70,31,medium
+SUP_B,Flatpack Components Co,0.94,0.88,0.05,0.91,6,low
+SUP_C,Coastal Seating,0.96,0.91,0.04,0.94,4,low
+SUP_D,Urban Desk Parts,0.68,0.71,0.11,0.58,52,high

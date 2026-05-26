@@ -1,0 +1,5 @@
+shipment_id,order_id,component_sku,qty,source_node,destination_node,status,eta_date,exception_note
+SHP-7001,ORD-1044,SOFA-BASE-01,1,CG_GA,CUSTOMER_SE,ready_to_release,2026-05-27,Can ship base now if split-ship is approved
+SHP-7002,ORD-1044,SOFA-LEG-01,1,CG_GA,CUSTOMER_SE,ready_to_release,2026-05-27,Can ship legs now if split-ship is approved
+SHP-7003,ORD-1044,HW-03,1,CG_GA,CUSTOMER_SE,ready_to_release,2026-05-27,Can ship connector kit now if split-ship is approved
+SHP-7004,ORD-1044,CUSHION-01,1,SUP_C,CUSTOMER_SE,pending_supplier_release,2026-05-28,Fresh supplier feed supports direct cushion shipment
