@@ -58,6 +58,7 @@ Sign up at [subconscious.dev/platform](https://www.subconscious.dev/platform) an
 
 ```bash
 pnpm install
+# pnpm install --config.minimumReleaseAge=0
 cp .env.example .env.local
 # Set SUBCONSCIOUS_API_KEY in .env.local
 ```
