@@ -1,0 +1,114 @@
+[
+  {
+    "from_node": "CG_KY",
+    "to_node": "CG_NJ",
+    "transit_days": 1,
+    "cost": 18,
+    "large_parcel_supported": true,
+    "damage_risk": 0.03
+  },
+  {
+    "from_node": "CG_NJ",
+    "to_node": "CG_KY",
+    "transit_days": 1,
+    "cost": 18,
+    "large_parcel_supported": true,
+    "damage_risk": 0.03
+  },
+  {
+    "from_node": "CG_GA",
+    "to_node": "CG_NJ",
+    "transit_days": 2,
+    "cost": 28,
+    "large_parcel_supported": true,
+    "damage_risk": 0.04
+  },
+  {
+    "from_node": "SUP_A",
+    "to_node": "CG_NJ",
+    "transit_days": 3,
+    "cost": 24,
+    "large_parcel_supported": true,
+    "damage_risk": 0.07
+  },
+  {
+    "from_node": "SUP_B",
+    "to_node": "CG_NJ",
+    "transit_days": 2,
+    "cost": 20,
+    "large_parcel_supported": true,
+    "damage_risk": 0.05
+  },
+  {
+    "from_node": "SUP_C",
+    "to_node": "CG_GA",
+    "transit_days": 1,
+    "cost": 16,
+    "large_parcel_supported": true,
+    "damage_risk": 0.04
+  },
+  {
+    "from_node": "SUP_D",
+    "to_node": "CG_KY",
+    "transit_days": 3,
+    "cost": 22,
+    "large_parcel_supported": false,
+    "damage_risk": 0.08
+  },
+  {
+    "from_node": "CG_NJ",
+    "to_node": "CUSTOMER_NE",
+    "transit_days": 1,
+    "cost": 20,
+    "large_parcel_supported": true,
+    "damage_risk": 0.04
+  },
+  {
+    "from_node": "CG_KY",
+    "to_node": "CUSTOMER_NE",
+    "transit_days": 3,
+    "cost": 35,
+    "large_parcel_supported": true,
+    "damage_risk": 0.06
+  },
+  {
+    "from_node": "SUP_A",
+    "to_node": "CUSTOMER_NE",
+    "transit_days": 4,
+    "cost": 30,
+    "large_parcel_supported": true,
+    "damage_risk": 0.09
+  },
+  {
+    "from_node": "CG_GA",
+    "to_node": "CUSTOMER_SE",
+    "transit_days": 1,
+    "cost": 18,
+    "large_parcel_supported": true,
+    "damage_risk": 0.04
+  },
+  {
+    "from_node": "SUP_C",
+    "to_node": "CUSTOMER_SE",
+    "transit_days": 1,
+    "cost": 14,
+    "large_parcel_supported": true,
+    "damage_risk": 0.04
+  },
+  {
+    "from_node": "CG_KY",
+    "to_node": "CUSTOMER_MW",
+    "transit_days": 1,
+    "cost": 18,
+    "large_parcel_supported": true,
+    "damage_risk": 0.04
+  },
+  {
+    "from_node": "SUP_D",
+    "to_node": "CUSTOMER_MW",
+    "transit_days": 3,
+    "cost": 25,
+    "large_parcel_supported": false,
+    "damage_risk": 0.1
+  }
+]

@@ -1,0 +1,42 @@
+[
+  {
+    "shipment_id": "SHP-7001",
+    "order_id": "ORD-1044",
+    "component_sku": "SOFA-BASE-01",
+    "qty": 1,
+    "source_node": "CG_GA",
+    "destination_node": "CUSTOMER_SE",
+    "status": "ready_to_release",
+    "eta_date": "2026-05-27"
+  },
+  {
+    "shipment_id": "SHP-7002",
+    "order_id": "ORD-1044",
+    "component_sku": "SOFA-LEG-01",
+    "qty": 1,
+    "source_node": "CG_GA",
+    "destination_node": "CUSTOMER_SE",
+    "status": "ready_to_release",
+    "eta_date": "2026-05-27"
+  },
+  {
+    "shipment_id": "SHP-7003",
+    "order_id": "ORD-1044",
+    "component_sku": "HW-03",
+    "qty": 1,
+    "source_node": "CG_GA",
+    "destination_node": "CUSTOMER_SE",
+    "status": "ready_to_release",
+    "eta_date": "2026-05-27"
+  },
+  {
+    "shipment_id": "SHP-7004",
+    "order_id": "ORD-1044",
+    "component_sku": "CUSHION-01",
+    "qty": 1,
+    "source_node": "SUP_C",
+    "destination_node": "CUSTOMER_SE",
+    "status": "pending_supplier_release",
+    "eta_date": "2026-05-28"
+  }
+]

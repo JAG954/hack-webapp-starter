@@ -1,0 +1,138 @@
+[
+  {
+    "component_sku": "TABLETOP-01",
+    "component_name": "Oak Tabletop",
+    "component_type": "table_part",
+    "large_parcel": true,
+    "fragile": true,
+    "substitutable": false
+  },
+  {
+    "component_sku": "LEG-01",
+    "component_name": "Table Leg Pack",
+    "component_type": "table_part",
+    "large_parcel": false,
+    "fragile": false,
+    "substitutable": true
+  },
+  {
+    "component_sku": "CHAIR-01",
+    "component_name": "Dining Chair",
+    "component_type": "chair",
+    "large_parcel": true,
+    "fragile": true,
+    "substitutable": false
+  },
+  {
+    "component_sku": "HW-01",
+    "component_name": "Dining Hardware Kit",
+    "component_type": "hardware",
+    "large_parcel": false,
+    "fragile": false,
+    "substitutable": true
+  },
+  {
+    "component_sku": "HEADBOARD-01",
+    "component_name": "Queen Headboard",
+    "component_type": "bed_part",
+    "large_parcel": true,
+    "fragile": true,
+    "substitutable": false
+  },
+  {
+    "component_sku": "FOOTBOARD-01",
+    "component_name": "Queen Footboard",
+    "component_type": "bed_part",
+    "large_parcel": true,
+    "fragile": true,
+    "substitutable": false
+  },
+  {
+    "component_sku": "RAIL-01",
+    "component_name": "Side Rail Pair",
+    "component_type": "bed_part",
+    "large_parcel": true,
+    "fragile": false,
+    "substitutable": false
+  },
+  {
+    "component_sku": "SLAT-01",
+    "component_name": "Slat Pack",
+    "component_type": "bed_part",
+    "large_parcel": true,
+    "fragile": false,
+    "substitutable": true
+  },
+  {
+    "component_sku": "HW-02",
+    "component_name": "Bed Hardware Kit",
+    "component_type": "hardware",
+    "large_parcel": false,
+    "fragile": false,
+    "substitutable": true
+  },
+  {
+    "component_sku": "SOFA-BASE-01",
+    "component_name": "Sofa Base",
+    "component_type": "sofa_part",
+    "large_parcel": true,
+    "fragile": true,
+    "substitutable": false
+  },
+  {
+    "component_sku": "CUSHION-01",
+    "component_name": "Cushion Set",
+    "component_type": "sofa_part",
+    "large_parcel": true,
+    "fragile": false,
+    "substitutable": true
+  },
+  {
+    "component_sku": "SOFA-LEG-01",
+    "component_name": "Sofa Leg Pack",
+    "component_type": "sofa_part",
+    "large_parcel": false,
+    "fragile": false,
+    "substitutable": true
+  },
+  {
+    "component_sku": "HW-03",
+    "component_name": "Sofa Connector Kit",
+    "component_type": "hardware",
+    "large_parcel": false,
+    "fragile": false,
+    "substitutable": true
+  },
+  {
+    "component_sku": "DESKTOP-01",
+    "component_name": "Desktop Panel",
+    "component_type": "desk_part",
+    "large_parcel": true,
+    "fragile": true,
+    "substitutable": false
+  },
+  {
+    "component_sku": "FRAME-01",
+    "component_name": "Desk Frame",
+    "component_type": "desk_part",
+    "large_parcel": true,
+    "fragile": false,
+    "substitutable": false
+  },
+  {
+    "component_sku": "DRAWER-01",
+    "component_name": "Drawer Slide Kit",
+    "component_type": "hardware",
+    "large_parcel": false,
+    "fragile": false,
+    "substitutable": true
+  },
+  {
+    "component_sku": "HW-04",
+    "component_name": "Desk Hardware Kit",
+    "component_type": "hardware",
+    "large_parcel": false,
+    "fragile": false,
+    "substitutable": true
+  }
+]

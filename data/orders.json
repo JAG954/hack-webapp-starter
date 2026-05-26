@@ -1,0 +1,50 @@
+[
+  {
+    "order_id": "ORD-1042",
+    "order_date": "2026-05-26",
+    "promise_date": "2026-05-30",
+    "customer_zone": "CUSTOMER_NE",
+    "customer_region": "Northeast",
+    "preferred_node": "CG_NJ",
+    "set_sku": "DS-200",
+    "qty_sets": 1,
+    "priority": "high",
+    "customer_note": "Customer expects full dining set before weekend"
+  },
+  {
+    "order_id": "ORD-1043",
+    "order_date": "2026-05-26",
+    "promise_date": "2026-05-29",
+    "customer_zone": "CUSTOMER_NE",
+    "customer_region": "Northeast",
+    "preferred_node": "CG_NJ",
+    "set_sku": "BED-510",
+    "qty_sets": 1,
+    "priority": "medium",
+    "customer_note": "Customer can tolerate one-day warehouse hold but not split furniture delivery"
+  },
+  {
+    "order_id": "ORD-1044",
+    "order_date": "2026-05-26",
+    "promise_date": "2026-05-28",
+    "customer_zone": "CUSTOMER_SE",
+    "customer_region": "Southeast",
+    "preferred_node": "CG_GA",
+    "set_sku": "SOFA-330",
+    "qty_sets": 1,
+    "priority": "high",
+    "customer_note": "Customer has close delivery window and cushions can arrive separately"
+  },
+  {
+    "order_id": "ORD-1045",
+    "order_date": "2026-05-26",
+    "promise_date": "2026-05-27",
+    "customer_zone": "CUSTOMER_MW",
+    "customer_region": "Midwest",
+    "preferred_node": "CG_KY",
+    "set_sku": "DESK-120",
+    "qty_sets": 1,
+    "priority": "high",
+    "customer_note": "Expedited office setup with no delivery flexibility"
+  }
+]

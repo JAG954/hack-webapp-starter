@@ -1,0 +1,42 @@
+[
+  {
+    "supplier_id": "SUP_A",
+    "supplier_name": "Oak Ridge Furnishings",
+    "fill_rate": 0.82,
+    "on_time_rate": 0.76,
+    "damage_rate": 0.08,
+    "feed_accuracy": 0.7,
+    "last_update_hours_ago": 31,
+    "risk_tier": "medium"
+  },
+  {
+    "supplier_id": "SUP_B",
+    "supplier_name": "Flatpack Components Co",
+    "fill_rate": 0.94,
+    "on_time_rate": 0.88,
+    "damage_rate": 0.05,
+    "feed_accuracy": 0.91,
+    "last_update_hours_ago": 6,
+    "risk_tier": "low"
+  },
+  {
+    "supplier_id": "SUP_C",
+    "supplier_name": "Coastal Seating",
+    "fill_rate": 0.96,
+    "on_time_rate": 0.91,
+    "damage_rate": 0.04,
+    "feed_accuracy": 0.94,
+    "last_update_hours_ago": 4,
+    "risk_tier": "low"
+  },
+  {
+    "supplier_id": "SUP_D",
+    "supplier_name": "Urban Desk Parts",
+    "fill_rate": 0.68,
+    "on_time_rate": 0.71,
+    "damage_rate": 0.11,
+    "feed_accuracy": 0.58,
+    "last_update_hours_ago": 52,
+    "risk_tier": "high"
+  }
+]

@@ -1,0 +1,263 @@
+[
+  {
+    "node_id": "CG_NJ",
+    "node_type": "CastleGate",
+    "region": "Northeast",
+    "component_sku": "TABLETOP-01",
+    "on_hand": 2,
+    "reserved": 0,
+    "last_update_hours_ago": 2
+  },
+  {
+    "node_id": "CG_NJ",
+    "node_type": "CastleGate",
+    "region": "Northeast",
+    "component_sku": "LEG-01",
+    "on_hand": 20,
+    "reserved": 4,
+    "last_update_hours_ago": 2
+  },
+  {
+    "node_id": "CG_NJ",
+    "node_type": "CastleGate",
+    "region": "Northeast",
+    "component_sku": "CHAIR-01",
+    "on_hand": 4,
+    "reserved": 0,
+    "last_update_hours_ago": 2
+  },
+  {
+    "node_id": "CG_NJ",
+    "node_type": "CastleGate",
+    "region": "Northeast",
+    "component_sku": "HW-01",
+    "on_hand": 0,
+    "reserved": 0,
+    "last_update_hours_ago": 2
+  },
+  {
+    "node_id": "CG_KY",
+    "node_type": "CastleGate",
+    "region": "Midwest",
+    "component_sku": "TABLETOP-01",
+    "on_hand": 6,
+    "reserved": 2,
+    "last_update_hours_ago": 3
+  },
+  {
+    "node_id": "CG_KY",
+    "node_type": "CastleGate",
+    "region": "Midwest",
+    "component_sku": "LEG-01",
+    "on_hand": 8,
+    "reserved": 0,
+    "last_update_hours_ago": 3
+  },
+  {
+    "node_id": "CG_KY",
+    "node_type": "CastleGate",
+    "region": "Midwest",
+    "component_sku": "CHAIR-01",
+    "on_hand": 12,
+    "reserved": 0,
+    "last_update_hours_ago": 3
+  },
+  {
+    "node_id": "CG_KY",
+    "node_type": "CastleGate",
+    "region": "Midwest",
+    "component_sku": "HW-01",
+    "on_hand": 3,
+    "reserved": 0,
+    "last_update_hours_ago": 3
+  },
+  {
+    "node_id": "SUP_A",
+    "node_type": "Supplier",
+    "region": "Northeast",
+    "component_sku": "TABLETOP-01",
+    "on_hand": 20,
+    "reserved": 5,
+    "last_update_hours_ago": 31
+  },
+  {
+    "node_id": "SUP_A",
+    "node_type": "Supplier",
+    "region": "Northeast",
+    "component_sku": "LEG-01",
+    "on_hand": 40,
+    "reserved": 0,
+    "last_update_hours_ago": 31
+  },
+  {
+    "node_id": "SUP_A",
+    "node_type": "Supplier",
+    "region": "Northeast",
+    "component_sku": "HW-01",
+    "on_hand": 50,
+    "reserved": 0,
+    "last_update_hours_ago": 31
+  },
+  {
+    "node_id": "SUP_B",
+    "node_type": "Supplier",
+    "region": "Midwest",
+    "component_sku": "LEG-01",
+    "on_hand": 100,
+    "reserved": 20,
+    "last_update_hours_ago": 6
+  },
+  {
+    "node_id": "SUP_B",
+    "node_type": "Supplier",
+    "region": "Midwest",
+    "component_sku": "SLAT-01",
+    "on_hand": 0,
+    "reserved": 0,
+    "last_update_hours_ago": 6
+  },
+  {
+    "node_id": "CG_NJ",
+    "node_type": "CastleGate",
+    "region": "Northeast",
+    "component_sku": "HEADBOARD-01",
+    "on_hand": 1,
+    "reserved": 0,
+    "last_update_hours_ago": 2
+  },
+  {
+    "node_id": "CG_NJ",
+    "node_type": "CastleGate",
+    "region": "Northeast",
+    "component_sku": "FOOTBOARD-01",
+    "on_hand": 1,
+    "reserved": 0,
+    "last_update_hours_ago": 2
+  },
+  {
+    "node_id": "CG_NJ",
+    "node_type": "CastleGate",
+    "region": "Northeast",
+    "component_sku": "RAIL-01",
+    "on_hand": 1,
+    "reserved": 0,
+    "last_update_hours_ago": 2
+  },
+  {
+    "node_id": "CG_NJ",
+    "node_type": "CastleGate",
+    "region": "Northeast",
+    "component_sku": "SLAT-01",
+    "on_hand": 0,
+    "reserved": 0,
+    "last_update_hours_ago": 2
+  },
+  {
+    "node_id": "CG_NJ",
+    "node_type": "CastleGate",
+    "region": "Northeast",
+    "component_sku": "HW-02",
+    "on_hand": 2,
+    "reserved": 0,
+    "last_update_hours_ago": 2
+  },
+  {
+    "node_id": "CG_GA",
+    "node_type": "CastleGate",
+    "region": "Southeast",
+    "component_sku": "SOFA-BASE-01",
+    "on_hand": 1,
+    "reserved": 0,
+    "last_update_hours_ago": 2
+  },
+  {
+    "node_id": "CG_GA",
+    "node_type": "CastleGate",
+    "region": "Southeast",
+    "component_sku": "CUSHION-01",
+    "on_hand": 0,
+    "reserved": 0,
+    "last_update_hours_ago": 2
+  },
+  {
+    "node_id": "CG_GA",
+    "node_type": "CastleGate",
+    "region": "Southeast",
+    "component_sku": "SOFA-LEG-01",
+    "on_hand": 4,
+    "reserved": 0,
+    "last_update_hours_ago": 2
+  },
+  {
+    "node_id": "CG_GA",
+    "node_type": "CastleGate",
+    "region": "Southeast",
+    "component_sku": "HW-03",
+    "on_hand": 3,
+    "reserved": 0,
+    "last_update_hours_ago": 2
+  },
+  {
+    "node_id": "SUP_C",
+    "node_type": "Supplier",
+    "region": "Southeast",
+    "component_sku": "CUSHION-01",
+    "on_hand": 5,
+    "reserved": 0,
+    "last_update_hours_ago": 4
+  },
+  {
+    "node_id": "CG_KY",
+    "node_type": "CastleGate",
+    "region": "Midwest",
+    "component_sku": "DESKTOP-01",
+    "on_hand": 1,
+    "reserved": 0,
+    "last_update_hours_ago": 3
+  },
+  {
+    "node_id": "CG_KY",
+    "node_type": "CastleGate",
+    "region": "Midwest",
+    "component_sku": "FRAME-01",
+    "on_hand": 1,
+    "reserved": 0,
+    "last_update_hours_ago": 3
+  },
+  {
+    "node_id": "CG_KY",
+    "node_type": "CastleGate",
+    "region": "Midwest",
+    "component_sku": "DRAWER-01",
+    "on_hand": 0,
+    "reserved": 0,
+    "last_update_hours_ago": 3
+  },
+  {
+    "node_id": "CG_KY",
+    "node_type": "CastleGate",
+    "region": "Midwest",
+    "component_sku": "HW-04",
+    "on_hand": 1,
+    "reserved": 0,
+    "last_update_hours_ago": 3
+  },
+  {
+    "node_id": "SUP_D",
+    "node_type": "Supplier",
+    "region": "Midwest",
+    "component_sku": "DRAWER-01",
+    "on_hand": 6,
+    "reserved": 0,
+    "last_update_hours_ago": 52
+  },
+  {
+    "node_id": "SUP_D",
+    "node_type": "Supplier",
+    "region": "Midwest",
+    "component_sku": "HW-04",
+    "on_hand": 30,
+    "reserved": 10,
+    "last_update_hours_ago": 52
+  }
+]

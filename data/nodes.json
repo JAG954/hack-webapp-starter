@@ -1,0 +1,92 @@
+[
+  {
+    "node_id": "CG_NJ",
+    "node_type": "CastleGate",
+    "node_name": "Northeast CastleGate",
+    "region": "Northeast",
+    "city": "Elizabeth",
+    "state": "NJ",
+    "large_parcel_capable": true
+  },
+  {
+    "node_id": "CG_KY",
+    "node_type": "CastleGate",
+    "node_name": "Central CastleGate",
+    "region": "Midwest",
+    "city": "Erlanger",
+    "state": "KY",
+    "large_parcel_capable": true
+  },
+  {
+    "node_id": "CG_GA",
+    "node_type": "CastleGate",
+    "node_name": "Southeast CastleGate",
+    "region": "Southeast",
+    "city": "Savannah",
+    "state": "GA",
+    "large_parcel_capable": true
+  },
+  {
+    "node_id": "SUP_A",
+    "node_type": "Supplier",
+    "node_name": "Oak Ridge Furnishings",
+    "region": "Northeast",
+    "city": "Scranton",
+    "state": "PA",
+    "large_parcel_capable": true
+  },
+  {
+    "node_id": "SUP_B",
+    "node_type": "Supplier",
+    "node_name": "Flatpack Components Co",
+    "region": "Midwest",
+    "city": "Columbus",
+    "state": "OH",
+    "large_parcel_capable": true
+  },
+  {
+    "node_id": "SUP_C",
+    "node_type": "Supplier",
+    "node_name": "Coastal Seating",
+    "region": "Southeast",
+    "city": "Charleston",
+    "state": "SC",
+    "large_parcel_capable": true
+  },
+  {
+    "node_id": "SUP_D",
+    "node_type": "Supplier",
+    "node_name": "Urban Desk Parts",
+    "region": "Midwest",
+    "city": "Fort Wayne",
+    "state": "IN",
+    "large_parcel_capable": false
+  },
+  {
+    "node_id": "CUSTOMER_NE",
+    "node_type": "CustomerZone",
+    "node_name": "Northeast Customer Zone",
+    "region": "Northeast",
+    "city": "Boston",
+    "state": "MA",
+    "large_parcel_capable": true
+  },
+  {
+    "node_id": "CUSTOMER_MW",
+    "node_type": "CustomerZone",
+    "node_name": "Midwest Customer Zone",
+    "region": "Midwest",
+    "city": "Chicago",
+    "state": "IL",
+    "large_parcel_capable": true
+  },
+  {
+    "node_id": "CUSTOMER_SE",
+    "node_type": "CustomerZone",
+    "node_name": "Southeast Customer Zone",
+    "region": "Southeast",
+    "city": "Atlanta",
+    "state": "GA",
+    "large_parcel_capable": true
+  }
+]

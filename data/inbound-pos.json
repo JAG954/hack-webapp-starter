@@ -1,0 +1,42 @@
+[
+  {
+    "po_id": "PO-9001",
+    "supplier_id": "SUP_A",
+    "destination_node": "CG_NJ",
+    "component_sku": "SLAT-01",
+    "qty": 12,
+    "confirmed": true,
+    "eta_date": "2026-05-27",
+    "linked_order_id": "ORD-1043"
+  },
+  {
+    "po_id": "PO-9002",
+    "supplier_id": "SUP_C",
+    "destination_node": "CG_GA",
+    "component_sku": "CUSHION-01",
+    "qty": 10,
+    "confirmed": true,
+    "eta_date": "2026-05-29",
+    "linked_order_id": "ORD-1044"
+  },
+  {
+    "po_id": "PO-9003",
+    "supplier_id": "SUP_D",
+    "destination_node": "CG_KY",
+    "component_sku": "DRAWER-01",
+    "qty": 10,
+    "confirmed": false,
+    "eta_date": "2026-05-29",
+    "linked_order_id": "ORD-1045"
+  },
+  {
+    "po_id": "PO-9004",
+    "supplier_id": "SUP_A",
+    "destination_node": "CG_NJ",
+    "component_sku": "HW-01",
+    "qty": 20,
+    "confirmed": false,
+    "eta_date": "2026-05-30",
+    "linked_order_id": "ORD-1042"
+  }
+]

@@ -1,0 +1,121 @@
+[
+  {
+    "set_sku": "DS-200",
+    "component_sku": "TABLETOP-01",
+    "qty_required": 1,
+    "component_role": "core",
+    "must_ship_together": true
+  },
+  {
+    "set_sku": "DS-200",
+    "component_sku": "LEG-01",
+    "qty_required": 1,
+    "component_role": "core",
+    "must_ship_together": true
+  },
+  {
+    "set_sku": "DS-200",
+    "component_sku": "CHAIR-01",
+    "qty_required": 4,
+    "component_role": "core",
+    "must_ship_together": false
+  },
+  {
+    "set_sku": "DS-200",
+    "component_sku": "HW-01",
+    "qty_required": 1,
+    "component_role": "assembly_blocker",
+    "must_ship_together": true
+  },
+  {
+    "set_sku": "BED-510",
+    "component_sku": "HEADBOARD-01",
+    "qty_required": 1,
+    "component_role": "core",
+    "must_ship_together": true
+  },
+  {
+    "set_sku": "BED-510",
+    "component_sku": "FOOTBOARD-01",
+    "qty_required": 1,
+    "component_role": "core",
+    "must_ship_together": true
+  },
+  {
+    "set_sku": "BED-510",
+    "component_sku": "RAIL-01",
+    "qty_required": 1,
+    "component_role": "core",
+    "must_ship_together": true
+  },
+  {
+    "set_sku": "BED-510",
+    "component_sku": "SLAT-01",
+    "qty_required": 1,
+    "component_role": "assembly_blocker",
+    "must_ship_together": true
+  },
+  {
+    "set_sku": "BED-510",
+    "component_sku": "HW-02",
+    "qty_required": 1,
+    "component_role": "assembly_blocker",
+    "must_ship_together": true
+  },
+  {
+    "set_sku": "SOFA-330",
+    "component_sku": "SOFA-BASE-01",
+    "qty_required": 1,
+    "component_role": "core",
+    "must_ship_together": true
+  },
+  {
+    "set_sku": "SOFA-330",
+    "component_sku": "CUSHION-01",
+    "qty_required": 1,
+    "component_role": "comfort_component",
+    "must_ship_together": false
+  },
+  {
+    "set_sku": "SOFA-330",
+    "component_sku": "SOFA-LEG-01",
+    "qty_required": 1,
+    "component_role": "assembly_blocker",
+    "must_ship_together": true
+  },
+  {
+    "set_sku": "SOFA-330",
+    "component_sku": "HW-03",
+    "qty_required": 1,
+    "component_role": "assembly_blocker",
+    "must_ship_together": true
+  },
+  {
+    "set_sku": "DESK-120",
+    "component_sku": "DESKTOP-01",
+    "qty_required": 1,
+    "component_role": "core",
+    "must_ship_together": true
+  },
+  {
+    "set_sku": "DESK-120",
+    "component_sku": "FRAME-01",
+    "qty_required": 1,
+    "component_role": "core",
+    "must_ship_together": true
+  },
+  {
+    "set_sku": "DESK-120",
+    "component_sku": "DRAWER-01",
+    "qty_required": 1,
+    "component_role": "assembly_blocker",
+    "must_ship_together": true
+  },
+  {
+    "set_sku": "DESK-120",
+    "component_sku": "HW-04",
+    "qty_required": 1,
+    "component_role": "assembly_blocker",
+    "must_ship_together": true
+  }
+]
