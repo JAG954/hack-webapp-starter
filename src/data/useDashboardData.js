@@ -61,10 +61,29 @@ export function useDashboardData() {
   const [source, setSource] = useState("mock");
   const [lastUpdated, setLastUpdated] = useState(null);
   const [isLoading, setIsLoading] = useState(true);
+  // null = haven't checked yet; true/false populated by the /api/health
+  // probe so the dashboard can show an "Agent online/offline" chip.
+  const [agentReady, setAgentReady] = useState(null);
 
   const everReceivedLiveRef = useRef(false);
   const inFlightRef = useRef(null);
   const mountedRef = useRef(true);
+
+  // Health probe — same cadence as the data poll so the chip stays fresh
+  // if the server is restarted mid-demo. Runs only in the browser.
+  const probeHealth = useCallback(async () => {
+    if (typeof window === "undefined") return;
+    try {
+      const res = await fetch("/api/health", { cache: "no-store" });
+      if (!res.ok) throw new Error("health check failed");
+      const json = await res.json();
+      if (!mountedRef.current) return;
+      setAgentReady(Boolean(json.agentReady));
+    } catch {
+      if (!mountedRef.current) return;
+      setAgentReady(false);
+    }
+  }, []);
 
   // The "core" fetch: no synchronous setState. Safe to invoke from a
   // useEffect body or setInterval tick because all state updates happen
@@ -111,14 +130,18 @@ export function useDashboardData() {
   useEffect(() => {
     mountedRef.current = true;
     const initialTimer = setTimeout(performFetch, 0);
+    const initialHealthTimer = setTimeout(probeHealth, 0);
     const id = setInterval(performFetch, POLL_INTERVAL_MS);
+    const healthId = setInterval(probeHealth, POLL_INTERVAL_MS);
     return () => {
       mountedRef.current = false;
       clearTimeout(initialTimer);
+      clearTimeout(initialHealthTimer);
       clearInterval(id);
+      clearInterval(healthId);
       if (inFlightRef.current) inFlightRef.current.abort();
     };
-  }, [performFetch]);
+  }, [performFetch, probeHealth]);
 
   const criticalExceptions = deriveCriticalExceptions(data.orders);
 
@@ -129,5 +152,6 @@ export function useDashboardData() {
     lastUpdated, // Date | null
     isLoading,
     refetch,
+    agentReady, // null | true | false
   };
 }

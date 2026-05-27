@@ -88,6 +88,8 @@ export function ChatApp() {
   const [mode, setMode] = useState<Mode>("chat");
   const [input, setInput] = useState("");
   const [imageFile, setImageFile] = useState<File | null>(null);
+  // null = haven't checked yet (don't flash a banner during the first paint).
+  const [agentReady, setAgentReady] = useState<boolean | null>(null);
   const fileInputRef = useRef<HTMLInputElement>(null);
 
   // Deep-link from the dashboard order drawer: /chat?prefill=<text>&mode=agent
@@ -107,6 +109,29 @@ export function ChatApp() {
       }
     }, 0);
     return () => clearTimeout(timer);
+  }, []);
+
+  // Probe /api/health so we can show a clear "set the key" banner instead
+  // of letting the user submit a prompt that 500s on the server. Deferred
+  // through setTimeout(0) for the same lint-rule reason as the prefill
+  // effect.
+  useEffect(() => {
+    if (typeof window === "undefined") return;
+    let cancelled = false;
+    const timer = setTimeout(async () => {
+      try {
+        const res = await fetch("/api/health", { cache: "no-store" });
+        if (!res.ok) throw new Error("health check failed");
+        const data = (await res.json()) as { agentReady?: boolean };
+        if (!cancelled) setAgentReady(Boolean(data.agentReady));
+      } catch {
+        if (!cancelled) setAgentReady(false);
+      }
+    }, 0);
+    return () => {
+      cancelled = true;
+      clearTimeout(timer);
+    };
   }, []);
 
   const transport = useMemo(
@@ -201,6 +226,35 @@ export function ChatApp() {
             </p>
           )}
         </div>
+
+        {agentReady === false ? (
+          <div className="mb-4 flex flex-wrap items-center gap-2 rounded-xl border border-amber-500/40 bg-amber-500/[0.08] px-4 py-3 text-sm text-amber-200">
+            <span className="font-semibold">Agent offline.</span>
+            <span className="text-amber-100/80">
+              <code className="rounded bg-amber-900/40 px-1 text-amber-100">
+                SUBCONSCIOUS_API_KEY
+              </code>{" "}
+              is not set on the server. Drop it in{" "}
+              <code className="rounded bg-amber-900/40 px-1 text-amber-100">
+                .env.local
+              </code>{" "}
+              and restart{" "}
+              <code className="rounded bg-amber-900/40 px-1 text-amber-100">
+                pnpm start
+              </code>
+              . Get a key at{" "}
+              <a
+                href="https://www.subconscious.dev/platform"
+                target="_blank"
+                rel="noreferrer"
+                className="underline hover:text-amber-50"
+              >
+                subconscious.dev/platform
+              </a>
+              .
+            </span>
+          </div>
+        ) : null}
 
         <div className="flex-1 space-y-4 overflow-y-auto rounded-2xl border border-zinc-800 bg-zinc-950 p-4">
           {messages.length === 0 && (

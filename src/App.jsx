@@ -49,6 +49,36 @@ function SourceBadge({ source, isLoading }) {
   );
 }
 
+function AgentStatusChip({ agentReady }) {
+  // null while the first /api/health probe is in flight — render nothing
+  // so the header doesn't flicker between states.
+  if (agentReady === null) return null;
+  const online = agentReady === true;
+  return (
+    <div
+      title={
+        online
+          ? "SetShip agent is reachable — chat + drawer Ask agent are live"
+          : "SUBCONSCIOUS_API_KEY missing — set it in .env.local and restart"
+      }
+      className={`flex items-center gap-2 rounded-full border px-3 py-1 ${
+        online
+          ? "border-emerald-400/30 bg-emerald-400/10"
+          : "border-amber-400/40 bg-amber-400/10"
+      }`}
+    >
+      <span
+        className={`h-2 w-2 rounded-full ${
+          online ? "bg-emerald-400" : "bg-amber-400"
+        }`}
+      />
+      <span className={online ? "text-emerald-200" : "text-amber-200"}>
+        Agent {online ? "online" : "offline"}
+      </span>
+    </div>
+  );
+}
+
 export default function App() {
   const [selectedOrderId, setSelectedOrderId] = useState(null);
 
@@ -59,6 +89,7 @@ export default function App() {
     lastUpdated,
     isLoading,
     refetch,
+    agentReady,
   } = useDashboardData();
 
   const {
@@ -81,6 +112,7 @@ export default function App() {
 
   const headerActions = (
     <>
+      <AgentStatusChip agentReady={agentReady} />
       <SourceBadge source={source} isLoading={isLoading} />
       <div className="rounded-full border border-zinc-800 bg-zinc-950 px-3 py-1">
         Updated{" "}
