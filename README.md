@@ -1,50 +1,63 @@
-# Wayfair × Subconscious Hackathon Starter
+# SetShip Agent
 
-Build AI agents on **Subconscious** (TIM-Qwen3.6) with the **Vercel AI SDK**. This repo gives you a working chat UI, long-running agent mode, example tools, and an MCP template — so you can focus on your track, not boilerplate.
+> An explainable AI fulfillment-exception agent for incomplete furniture-set orders.
+> Built at **Beat The Clock Agent Hack** (Track 02 — Agents for Supply Chain),
+> hosted by Wayfair in Boston on May 26, 2026.
 
-**Sponsors:** Wayfair · Subconscious · Baseten · Cloudflare
+Wayfair's hard problem isn't just inventory visibility — it's deciding, in real
+time, whether a complete furniture set can actually be fulfilled across a
+fragmented network of CastleGate warehouses and external suppliers. SetShip
+Agent turns that exception-handling triage into an **explainable AI workflow**:
+a high-level ops dashboard that surfaces the red category at a glance, and a
+per-order drill-in that scores every fulfillment option (hold, reroute,
+split-ship, supplier-direct, escalate) and tells you _why_ the agent
+recommends what it recommends.
+
+**Built by:** Jishnu Auro Ghosh · Hsiang Yu Huang
 
 ---
 
-## Pick your track
+## What's interesting here
 
-Choose one challenge. Your agent should use tools (APIs, MCP, functions) and talk to users through the built-in UI.
+- **Live agent + deterministic scoring engine** working side-by-side.
+  The free-form chat at `/chat` streams real responses from Subconscious
+  (TIM-Qwen3.6-27B) with markdown rendering and a tool-call timeline.
+  The structured per-order evaluation at `/evaluate` runs the scoring
+  engine in `lib/setship/evaluate.ts` against the static dataset in
+  `data/*.json` and returns a fully explainable recommendation in &lt;50ms.
+- **Three coordinated UI surfaces in one product.** A SetShip-purple ops
+  dashboard at `/`, the partner-built order evaluator at `/evaluate`, and
+  the Subconscious agent at `/chat`. Deep-link from any red-category row
+  into the evaluator (preselects the order) or the agent (pre-fills a
+  context-rich prompt) without losing state.
+- **Wayfair-native visual language.** Brand purple `#7B189F` and sale-tag
+  magenta `#990E35` were extracted from wayfair.com and applied as
+  semantic tokens — red category = magenta, brand actions = purple — so
+  the demo feels native to the host's product, not bolted on.
+- **Graceful degradation.** Dashboard polls `GET /dashboard-summary`
+  every 15s and silently falls back to mock data if the endpoint isn't
+  available, so the demo is bulletproof. `/api/health` reports key status
+  so the UI can show "Agent offline" instead of letting the user hit a
+  silent 500.
 
-### Track 1 — Consumer Shopping Experience
+---
 
-Millions of customers shop for furniture on Wayfair every day.
+## Demo flow
 
-**Challenge:** Build an agent that improves discovery and the buyer experience.
-
-**Ideas to explore:**
-- Style or room-based product recommendations
-- “Help me furnish this room” from a photo or description
-- Compare options, explain tradeoffs, answer sizing questions
-- Guided search instead of endless filters
-
-### Track 2 — Supply Chain
-
-Wayfair and its supplier network move huge volumes of furniture worldwide.
-
-**Challenge:** Build an agent that improves Wayfair’s ability to manage its supply chain.
-
-**Ideas to explore:**
-- Track shipments, flag delays, summarize status
-- Answer “where is order X?” or “what’s at risk this week?”
-- Coordinate supplier updates, inventory, or routing decisions
-- Turn messy ops data into clear next steps
-
-### Track 3 — FinOps & Customer Service
-
-Wayfair runs ~$12B in revenue and serves ~22M customers a year.
-
-**Challenge:** Build an agent system that improves internal operations — financial operations or customer service.
-
-**Ideas to explore:**
-- Triage support tickets and draft responses
-- Look up order/billing history and explain charges
-- Summarize finance or ops metrics for a team
-- Route issues to the right team with context
+1. Open `/` — SetShip ops dashboard. Glance at the KPIs (218 orders
+   saved by the agent in the last 24h), the fulfillment breakdown, and
+   the red Critical Exceptions table.
+2. Click any red row (e.g. `ORD-1042`). A drawer slides in with the set
+   components, the per-SKU inventory state (in-stock / inbound /
+   backordered / quality-hold), the risk reason, and the agent's plain-
+   English recommendation.
+3. Click **"View full evaluation →"** to jump to `/evaluate?order=ORD-1042`.
+   The page preselects the order and runs the deterministic scoring
+   engine — inventory matrix across nodes, scored options, risk flags,
+   the agent timeline.
+4. Click **"Ask agent →"** instead to jump to `/chat` with a context-rich
+   prompt already loaded. Hit send and the Subconscious agent streams a
+   live answer (markdown-formatted, complete with tool calls).
 
 ---
 
@@ -52,120 +65,172 @@ Wayfair runs ~$12B in revenue and serves ~22M customers a year.
 
 **1. Get a Subconscious API key**
 
-Sign up at [subconscious.dev/platform](https://www.subconscious.dev/platform) and copy your key (`sky_...`).
+Sign up at [subconscious.dev/platform](https://www.subconscious.dev/platform)
+and copy your key (`sky_...`).
 
-**2. Create a .env.local file with your Subconscious API key**
+**2. Install + configure**
 
 ```bash
 pnpm install
-# pnpm install --config.minimumReleaseAge=0
 cp .env.example .env.local
-# Set SUBCONSCIOUS_API_KEY in .env.local
+# Add SUBCONSCIOUS_API_KEY=sky_... to .env.local
 ```
 
-**3. Run the app**
+**3. Run**
 
 ```bash
-pnpm dev
+pnpm build && pnpm start
+# → http://localhost:3000
 ```
 
-Open [http://localhost:3000](http://localhost:3000).
-
-**4. Try the two modes**
-
-- **Chat** — fast Q&A with demo tools (good for prototyping UX)
-- **Agent** — multi-step runs with search, long tasks, and MCP stubs (good for track demos)
-
-Use **Image** to attach a photo (e.g. a photo of a room or box).
+For development with hot reload: `pnpm dev`.
 
 ---
 
-## How to build on this repo
+## Tech stack
 
-You mostly edit three places:
-
-| What | Where |
-|------|--------|
-| Tools (APIs, data, actions) | `lib/tools/index.ts` |
-| Agent behavior & prompts | `lib/agents/index.ts` |
-| MCP integrations | `lib/tools/mcp-tools.ts` |
-
-### Add a tool
-
-Tools are functions your agent can call. Example:
-
-```typescript
-// lib/tools/index.ts
-export const searchProducts = tool({
-  description: "Search furniture by style, room, or keyword",
-  inputSchema: z.object({ query: z.string() }),
-  execute: async ({ query }) => {
-    // Call your API, mock data, or Cloudflare Worker
-    return { results: [] };
-  },
-});
-```
-
-Add it to `agentTools` in the same file, then customize the prompt in `lib/agents/index.ts` for your track.
-
-### Connect MCP
-
-MCP servers expose tools (files, APIs, databases). Wrap them as AI SDK tools — see `lib/tools/mcp-tools.ts`.
-
-```bash
-pnpm add @modelcontextprotocol/sdk
-```
-
-### Images (multimodal)
-
-The UI sends images as data URLs. Useful for room photos, screenshots, or docs. Details: `.agents/skills/subconscious-dev/references/multimodal.md`.
-
-### Long-running agents
-
-**Agent** mode runs up to 30 tool steps (`lib/agents/index.ts`). The API allows 5-minute runs (`app/api/chat/route.ts`). Increase either if your demo needs it.
+| Layer | Tools |
+|---|---|
+| Framework | Next.js 16 (App Router) + React 19 |
+| Styling | Tailwind CSS v4 |
+| Agent runtime | Vercel AI SDK · `ToolLoopAgent` |
+| Model | Subconscious TIM-Qwen3.6-27B via OpenAI-compatible API |
+| Scoring | Deterministic TypeScript engine — no LLM in the loop for `/evaluate` |
+| Validation | Zod (tool input schemas) |
 
 ---
 
-## What’s included
+## Architecture
 
-- **Subconscious provider** — `lib/subconscious.ts`
-- **Chat + research agents** — `lib/agents/index.ts`
-- **Example tools** — weather, calculator, web search stub, long task
-- **Streaming API** — `app/api/chat/route.ts`
-- **Chat UI** — `components/chat-app.tsx`
-- **Subconscious API skill** — `.agents/skills/subconscious-dev/` (for Cursor/Codex)
+```
+┌─────────────────────────────────────────────────────────────────┐
+│                          /  (dashboard)                          │
+│   KpiCards · FulfillmentBreakdown · CriticalExceptionQueue       │
+│   BottleneckLeaderboard · SupplierRiskPanel                      │
+│   AgentRecommendationFeed · OrderDetailDrawer                    │
+│   useDashboardData hook  ─►  /dashboard-summary (mock fallback)  │
+│                          ─►  /api/health (agent-online chip)     │
+└────────────────────────────┬────────────────────────────────────┘
+                             │  deep-link: ?order=<id>
+                             ▼
+        ┌──────────────────────────────────────────────┐
+        │              /evaluate (drill-in)             │
+        │   OrderSelector · OrderDetails ·              │
+        │   InventoryMatrix · OptionComparison ·        │
+        │   RecommendationPanel · RiskFlags ·           │
+        │   AgentTimeline                               │
+        │                                               │
+        │   /orders            ─► listOrders()          │
+        │   /evaluate-order    ─► evaluateOrder()       │
+        │      (deterministic scoring engine in         │
+        │       lib/setship/evaluate.ts)                │
+        └──────────────────────────────────────────────┘
 
-Re-install the skill anytime:
+                             │  deep-link: ?prefill=<context>
+                             ▼
+        ┌──────────────────────────────────────────────┐
+        │              /chat (free-form agent)          │
+        │   SiteHeader · MarkdownText · seed prompts    │
+        │   useChat (Vercel AI SDK)                     │
+        │                                               │
+        │   /api/chat  ─► ToolLoopAgent + Subconscious  │
+        │                  + setship-tools (eval, etc.) │
+        └──────────────────────────────────────────────┘
+```
 
-```bash
-npx skills add https://github.com/subconscious-systems/skills --skill subconscious-dev
+---
+
+## Repo map
+
+```
+app/
+├── page.tsx                       # mounts <App /> from src/App.jsx
+├── chat/page.tsx                  # mounts <ChatApp />
+├── evaluate/page.tsx              # mounts partner's <App /> + nav
+├── api/
+│   ├── chat/route.ts              # streaming Subconscious agent
+│   └── health/route.ts            # key-status probe
+├── orders/route.ts                # GET — partner backend
+├── evaluate-order/route.ts        # POST — partner backend scoring
+└── globals.css                    # Wayfair brand tokens
+
+src/
+├── App.jsx                        # dashboard composition
+├── data/
+│   ├── api.js                     # fetch client + USE_MOCK_DATA toggle
+│   ├── useDashboardData.js        # 15s poll, silent fallback, health probe
+│   └── mockDashboardData.js       # IDs aligned to data/orders.json
+└── components/
+    ├── SiteHeader.jsx             # shared nav (Dashboard / Evaluate / Agent)
+    ├── SiteFooter.jsx             # event + track + builders + logos
+    ├── PartnerLogos.jsx           # Baseten · Subconscious · Cloudflare · Wayfair
+    ├── KpiCards.jsx
+    ├── FulfillmentBreakdown.jsx
+    ├── CriticalExceptionQueue.jsx # the dominant red-category surface
+    ├── BottleneckLeaderboard.jsx
+    ├── SupplierRiskPanel.jsx
+    ├── AgentRecommendationFeed.jsx
+    ├── OrderDetailDrawer.jsx
+    └── MarkdownText.jsx           # in-house markdown → JSX renderer
+
+components/                        # partner-built order evaluator UI
+├── App.tsx
+├── OrderSelector.tsx · OrderDetails.tsx · InventoryMatrix.tsx
+├── OptionComparison.tsx · RecommendationPanel.tsx · RiskFlags.tsx
+├── AgentTimeline.tsx
+└── chat-app.tsx                   # Subconscious chat (rebranded)
+
+lib/
+├── subconscious.ts                # OpenAI-compatible Subconscious provider
+├── agents/index.ts                # chatAgent + researchAgent (ToolLoopAgent)
+├── tools/index.ts                 # chatTools + agentTools
+├── tools/setship-tools.ts         # evaluateSetshipOrder, listSetshipOrders
+└── setship/
+    ├── types.ts                   # OrderRecord, InventoryMatrixRow, ScoredOption…
+    ├── data.ts                    # static-data loader
+    └── evaluate.ts                # deterministic scoring engine (~750 lines)
+
+data/                              # static operational data
+└── *.json                         # bom · components · inventory · lanes …
+
+public/partners/                   # hackathon partner logos
+└── baseten.png · subconscious.jpg · cloudflare.jpg · wayfair.png
 ```
 
 ---
 
 ## Environment
 
-| Variable | Required |
-|----------|----------|
-| `SUBCONSCIOUS_API_KEY` | Yes — [get one here](https://www.subconscious.dev/platform) |
+| Variable | Required | Purpose |
+|---|---|---|
+| `SUBCONSCIOUS_API_KEY` | yes | Streaming chat + agent at `/chat`. [Get a key](https://www.subconscious.dev/platform). |
+| `NEXT_PUBLIC_DASHBOARD_API_URL` | no | Override the dashboard's live-data endpoint. Defaults to `http://localhost:8000/dashboard-summary`; mock data is used if unreachable. |
 
 ---
 
-## Deploy
-
-Set `SUBCONSCIOUS_API_KEY` on your host, then:
+## Verification
 
 ```bash
-pnpm build && pnpm start
-```
+pnpm lint    # → 0 errors
+pnpm build   # → ✓ 8 routes (/ /_not-found /api/chat /api/health /chat /evaluate /evaluate-order /orders)
+pnpm start   # → Ready in ~150ms on :3000
 
-Works on Vercel, Cloudflare, or any Node host.
+# Confirm agent works end-to-end
+curl -s http://localhost:3000/api/health
+# → {"hasSubconsciousKey":true,"agentReady":true}
+```
 
 ---
 
-## Links
+## Credits
 
-- [Subconscious Platform](https://www.subconscious.dev/platform) — API keys
-- [Subconscious Docs](https://docs.subconscious.dev)
-- [Vercel AI SDK — Agents](https://ai-sdk.dev/docs/agents/overview)
-- [Subconscious skills repo](https://github.com/subconscious-systems/skills)
+Built for **Beat The Clock Agent Hack**, Wayfair Office, Boston · May 26, 2026.
+
+| Partner | Role |
+|---|---|
+| **Baseten** | AI infrastructure |
+| **Subconscious** | Open-model agents (TIM-Qwen3.6-27B) |
+| **Cloudflare** | Tooling for agents |
+| **Wayfair** | Hackathon host |
+
+**Team:** Jishnu Auro Ghosh · Hsiang Yu Huang
