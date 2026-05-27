@@ -10,6 +10,7 @@ import BottleneckLeaderboard from "./components/BottleneckLeaderboard.jsx";
 import SupplierRiskPanel from "./components/SupplierRiskPanel.jsx";
 import AgentRecommendationFeed from "./components/AgentRecommendationFeed.jsx";
 import OrderDetailDrawer from "./components/OrderDetailDrawer.jsx";
+import PartnerLogos from "./components/PartnerLogos.jsx";
 import { useDashboardData } from "./data/useDashboardData.js";
 
 function formatLastUpdated(date) {
@@ -35,16 +36,16 @@ function SourceBadge({ source, isLoading }) {
           ? "Connected to backend /dashboard-summary"
           : "Backend unreachable — showing mock data"
       }
-      className="flex items-center gap-2 rounded-full border border-zinc-800 bg-zinc-950 px-3 py-1"
+      className="flex items-center gap-2 rounded-full border border-slate-200 bg-white px-3 py-1"
     >
       <span
         className={`h-2 w-2 rounded-full ${
           live
-            ? "bg-emerald-400 " + (isLoading ? "animate-pulse" : "")
-            : "bg-zinc-500"
+            ? "bg-emerald-500 " + (isLoading ? "animate-pulse" : "")
+            : "bg-slate-400"
         }`}
       />
-      <span className="text-zinc-200">{live ? "Live" : "Mock"}</span>
+      <span className="text-slate-700">{live ? "Live" : "Mock"}</span>
     </div>
   );
 }
@@ -63,16 +64,16 @@ function AgentStatusChip({ agentReady }) {
       }
       className={`flex items-center gap-2 rounded-full border px-3 py-1 ${
         online
-          ? "border-emerald-400/30 bg-emerald-400/10"
-          : "border-amber-400/40 bg-amber-400/10"
+          ? "border-emerald-500/40 bg-emerald-500/10"
+          : "border-amber-500/40 bg-amber-500/10"
       }`}
     >
       <span
         className={`h-2 w-2 rounded-full ${
-          online ? "bg-emerald-400" : "bg-amber-400"
+          online ? "bg-emerald-500" : "bg-amber-500"
         }`}
       />
-      <span className={online ? "text-emerald-200" : "text-amber-200"}>
+      <span className={online ? "text-emerald-700" : "text-amber-700"}>
         Agent {online ? "online" : "offline"}
       </span>
     </div>
@@ -114,21 +115,21 @@ export default function App() {
     <>
       <AgentStatusChip agentReady={agentReady} />
       <SourceBadge source={source} isLoading={isLoading} />
-      <div className="rounded-full border border-zinc-800 bg-zinc-950 px-3 py-1">
+      <div className="rounded-full border border-slate-200 bg-white px-3 py-1">
         Updated{" "}
-        <span className="font-medium text-zinc-200 tabular-nums">
+        <span className="font-medium text-slate-800 tabular-nums">
           {formatLastUpdated(lastUpdated)}
         </span>
       </div>
-      <div className="rounded-full border border-zinc-800 bg-zinc-950 px-3 py-1">
+      <div className="rounded-full border border-slate-200 bg-white px-3 py-1">
         Window:{" "}
-        <span className="font-medium text-zinc-200">{summary.windowLabel}</span>
+        <span className="font-medium text-slate-800">{summary.windowLabel}</span>
       </div>
       <button
         type="button"
         onClick={refetch}
         disabled={isLoading}
-        className="rounded-full border border-zinc-800 bg-zinc-950 px-3 py-1 text-zinc-200 transition hover:border-[#FF5C28] hover:text-[#FF5C28] disabled:opacity-50"
+        className="rounded-full border border-slate-200 bg-white px-3 py-1 text-slate-700 transition hover:border-[#7B189F] hover:text-[#7B189F] disabled:opacity-50"
       >
         {isLoading ? "Refreshing…" : "Refresh"}
       </button>
@@ -136,7 +137,7 @@ export default function App() {
   );
 
   return (
-    <div className="min-h-full bg-black text-white">
+    <div className="min-h-full text-slate-900">
       <SiteHeader
         subtitle="Furniture-Set Fulfillment · Operations"
         actions={headerActions}
@@ -175,7 +176,10 @@ export default function App() {
           onSelectOrder={setSelectedOrderId}
         />
 
-        <footer className="pb-4 pt-2 text-center text-[11px] text-zinc-600">
+        {/* Row 5: partner logo strip */}
+        <PartnerLogos />
+
+        <footer className="pb-4 pt-2 text-center text-[11px] text-slate-500">
           SetShip Agent · {source === "live" ? "live backend" : "mock data"} ·
           backend: GET /dashboard-summary
         </footer>

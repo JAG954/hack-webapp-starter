@@ -12,6 +12,12 @@ const eslintConfig = defineConfig([
     "out/**",
     "build/**",
     "next-env.d.ts",
+    // Saved-webpage references kept in the repo for the demo (Wayfair
+    // brand cues + hackathon partner logos) — minified vendor JS in
+    // these folders is not source we own and should not be linted.
+    "Beat The Clock Agent Hack_files/**",
+    "Wayfair.com - Online Home Store for Furniture, Decor, Outdoors & More_files/**",
+    "*.html",
   ]),
 ]);
 

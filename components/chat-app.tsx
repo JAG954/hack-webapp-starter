@@ -4,15 +4,17 @@ import { useChat } from "@ai-sdk/react";
 import { DefaultChatTransport, type UIMessage } from "ai";
 import { useEffect, useMemo, useRef, useState } from "react";
 import SiteHeader from "@/src/components/SiteHeader.jsx";
+import PartnerLogos from "@/src/components/PartnerLogos.jsx";
 
 type Mode = "chat" | "agent";
 
-// SetShip-themed seed prompts shown in the empty state. These nudge
-// hackathon demos toward the furniture-set supply-chain story.
+// SetShip-themed seed prompts shown in the empty state. IDs match the
+// orders the partner backend actually scores (data/orders.json), so a
+// click + send produces a real-data answer.
 const SEED_PROMPTS: { mode: Mode; text: string }[] = [
   {
     mode: "chat",
-    text: "Why is order WF-104238 split-ship instead of single-ship?",
+    text: "Why is order ORD-1042 split-ship instead of single-ship?",
   },
   {
     mode: "chat",
@@ -20,7 +22,7 @@ const SEED_PROMPTS: { mode: Mode; text: string }[] = [
   },
   {
     mode: "agent",
-    text: "Run a root-cause pass on the Halden Sectional backorder and propose two recovery paths.",
+    text: "Run a root-cause pass on ORD-1043 (Aspen Bedroom Set) and propose two recovery paths.",
   },
   {
     mode: "agent",
@@ -58,7 +60,7 @@ function MessagePart({
       <img
         src={part.url}
         alt={part.filename ?? "Uploaded image"}
-        className="mt-2 max-h-48 rounded-lg border border-zinc-800 object-contain"
+        className="mt-2 max-h-48 rounded-lg border border-slate-200 object-contain"
       />
     );
   }
@@ -69,10 +71,10 @@ function MessagePart({
     return (
       <div
         key={`${messageId}-tool-${index}`}
-        className="mt-2 rounded-lg border border-[#FF5C28]/30 bg-[rgb(255_92_40/0.12)] px-3 py-2 text-xs"
+        className="mt-2 rounded-lg border border-[#7B189F]/30 bg-[#7B189F]/[0.06] px-3 py-2 text-xs"
       >
-        <div className="font-medium text-[#FF5C28]">Tool: {label}</div>
-        <div className="mt-1 text-zinc-400">
+        <div className="font-medium text-[#7B189F]">Tool: {label}</div>
+        <div className="mt-1 text-slate-600">
           {state === "input-available" && "Calling…"}
           {state === "output-available" && "Done"}
           {state === "output-error" && "Error"}
@@ -179,14 +181,14 @@ export function ChatApp() {
   }
 
   const modeToggle = (
-    <div className="flex rounded-full border border-zinc-800 bg-zinc-950 p-1">
+    <div className="flex rounded-full border border-slate-200 bg-white p-1">
       <button
         type="button"
         onClick={() => setMode("chat")}
         className={`rounded-full px-3 py-1 text-xs font-medium transition ${
           mode === "chat"
-            ? "bg-[#FF5C28] text-black"
-            : "text-zinc-400 hover:text-white"
+            ? "bg-[#7B189F] text-white shadow-sm"
+            : "text-slate-600 hover:text-slate-900"
         }`}
       >
         Chat
@@ -196,8 +198,8 @@ export function ChatApp() {
         onClick={() => setMode("agent")}
         className={`rounded-full px-3 py-1 text-xs font-medium transition ${
           mode === "agent"
-            ? "bg-[#FF5C28] text-black"
-            : "text-zinc-400 hover:text-white"
+            ? "bg-[#7B189F] text-white shadow-sm"
+            : "text-slate-600 hover:text-slate-900"
         }`}
       >
         Agent
@@ -206,21 +208,21 @@ export function ChatApp() {
   );
 
   return (
-    <div className="flex min-h-full flex-col bg-black">
+    <div className="flex min-h-full flex-col text-slate-900">
       <SiteHeader subtitle="Agent Workspace" actions={modeToggle} />
 
       <main className="mx-auto flex w-full max-w-5xl flex-1 flex-col px-4 py-6">
-        <div className="mb-4 rounded-xl border border-zinc-800 bg-zinc-950 p-4 text-sm text-zinc-400">
+        <div className="mb-4 rounded-xl border border-slate-200 bg-white p-4 text-sm text-slate-600 shadow-sm">
           {mode === "chat" ? (
             <p>
-              <span className="font-medium text-[#FF5C28]">Chat mode</span> — fast
+              <span className="font-medium text-[#7B189F]">Chat mode</span> — fast
               answers about a specific order, supplier, or component. Best for
               follow-ups from the dashboard (open an order &rarr; “Ask the
               agent”).
             </p>
           ) : (
             <p>
-              <span className="font-medium text-[#FF5C28]">Agent mode</span> —
+              <span className="font-medium text-[#7B189F]">Agent mode</span> —
               multi-step fulfillment reasoning: bottleneck root-cause, supplier
               recovery plans, inventory rebalancing. Up to 30 tool steps.
             </p>
@@ -228,18 +230,18 @@ export function ChatApp() {
         </div>
 
         {agentReady === false ? (
-          <div className="mb-4 flex flex-wrap items-center gap-2 rounded-xl border border-amber-500/40 bg-amber-500/[0.08] px-4 py-3 text-sm text-amber-200">
+          <div className="mb-4 flex flex-wrap items-center gap-2 rounded-xl border border-amber-400/50 bg-amber-50 px-4 py-3 text-sm text-amber-900 shadow-sm">
             <span className="font-semibold">Agent offline.</span>
-            <span className="text-amber-100/80">
-              <code className="rounded bg-amber-900/40 px-1 text-amber-100">
+            <span>
+              <code className="rounded bg-amber-100 px-1 text-amber-900">
                 SUBCONSCIOUS_API_KEY
               </code>{" "}
               is not set on the server. Drop it in{" "}
-              <code className="rounded bg-amber-900/40 px-1 text-amber-100">
+              <code className="rounded bg-amber-100 px-1 text-amber-900">
                 .env.local
               </code>{" "}
               and restart{" "}
-              <code className="rounded bg-amber-900/40 px-1 text-amber-100">
+              <code className="rounded bg-amber-100 px-1 text-amber-900">
                 pnpm start
               </code>
               . Get a key at{" "}
@@ -247,7 +249,7 @@ export function ChatApp() {
                 href="https://www.subconscious.dev/platform"
                 target="_blank"
                 rel="noreferrer"
-                className="underline hover:text-amber-50"
+                className="underline hover:text-amber-950"
               >
                 subconscious.dev/platform
               </a>
@@ -256,13 +258,13 @@ export function ChatApp() {
           </div>
         ) : null}
 
-        <div className="flex-1 space-y-4 overflow-y-auto rounded-2xl border border-zinc-800 bg-zinc-950 p-4">
+        <div className="flex-1 space-y-4 overflow-y-auto rounded-2xl border border-slate-200 bg-white p-4 shadow-sm">
           {messages.length === 0 && (
-            <div className="flex h-full min-h-[320px] flex-col items-center justify-center text-center text-zinc-500">
-              <p className="text-lg font-medium text-zinc-200">
+            <div className="flex h-full min-h-[320px] flex-col items-center justify-center text-center text-slate-500">
+              <p className="text-lg font-medium text-slate-900">
                 Ask the SetShip agent
               </p>
-              <p className="mt-1 text-xs text-zinc-500">
+              <p className="mt-1 text-xs text-slate-500">
                 Try a fulfillment question, or open an order from the dashboard.
               </p>
               <ul className="mt-4 grid w-full max-w-xl gap-2 text-left text-sm">
@@ -271,7 +273,7 @@ export function ChatApp() {
                     <button
                       type="button"
                       onClick={() => setInput(seed.text)}
-                      className="w-full rounded-lg border border-zinc-800 bg-zinc-900/50 px-3 py-2 text-zinc-200 transition hover:border-[#FF5C28] hover:text-[#FF5C28]"
+                      className="w-full rounded-lg border border-slate-200 bg-slate-50 px-3 py-2 text-slate-800 transition hover:border-[#7B189F] hover:text-[#7B189F]"
                     >
                       {seed.text}
                     </button>
@@ -289,15 +291,15 @@ export function ChatApp() {
               <div
                 className={`max-w-[85%] rounded-2xl px-4 py-3 ${
                   message.role === "user"
-                    ? "bg-[#FF5C28] text-black"
-                    : "border border-zinc-800 bg-zinc-900 text-zinc-100"
+                    ? "bg-[#7B189F] text-white shadow-sm"
+                    : "border border-slate-200 bg-slate-50 text-slate-900"
                 }`}
               >
                 <div
                   className={`mb-1 text-xs font-medium uppercase tracking-wide ${
                     message.role === "user"
-                      ? "text-black/60"
-                      : "text-[#FF5C28]"
+                      ? "text-white/70"
+                      : "text-[#7B189F]"
                   }`}
                 >
                   {message.role}
@@ -315,29 +317,29 @@ export function ChatApp() {
           ))}
 
           {isBusy && (
-            <div className="flex items-center gap-2 text-sm text-zinc-400">
-              <span className="inline-block h-2 w-2 animate-pulse rounded-full bg-[#FF5C28]" />
+            <div className="flex items-center gap-2 text-sm text-slate-500">
+              <span className="inline-block h-2 w-2 animate-pulse rounded-full bg-[#7B189F]" />
               {mode === "agent" ? "Agent running…" : "Thinking…"}
             </div>
           )}
         </div>
 
         {error && (
-          <p className="mt-3 rounded-lg border border-red-900/50 bg-red-950/40 px-3 py-2 text-sm text-red-400">
+          <p className="mt-3 rounded-lg border border-[#990E35]/30 bg-[#990E35]/[0.06] px-3 py-2 text-sm text-[#990E35]">
             {error.message}
           </p>
         )}
 
         <form onSubmit={handleSubmit} className="mt-4 space-y-3">
           {imageFile && (
-            <div className="flex items-center gap-2 text-sm text-zinc-400">
+            <div className="flex items-center gap-2 text-sm text-slate-600">
               <span>
                 Image:{" "}
-                <span className="text-[#FF5C28]">{imageFile.name}</span>
+                <span className="text-[#7B189F]">{imageFile.name}</span>
               </span>
               <button
                 type="button"
-                className="text-[#FF5C28] hover:text-[#ff7347] hover:underline"
+                className="text-[#7B189F] hover:text-[#9333A5] hover:underline"
                 onClick={() => {
                   setImageFile(null);
                   if (fileInputRef.current) fileInputRef.current.value = "";
@@ -362,7 +364,7 @@ export function ChatApp() {
             <button
               type="button"
               onClick={() => fileInputRef.current?.click()}
-              className="rounded-xl border border-zinc-800 bg-zinc-950 px-3 py-2 text-sm font-medium text-zinc-200 hover:border-[#FF5C28] hover:text-[#FF5C28]"
+              className="rounded-xl border border-slate-200 bg-white px-3 py-2 text-sm font-medium text-slate-700 hover:border-[#7B189F] hover:text-[#7B189F]"
               title="Attach image for multimodal reasoning"
             >
               Image
@@ -375,14 +377,14 @@ export function ChatApp() {
                   ? "Kick off a long-running agent task…"
                   : "Send a message…"
               }
-              className="flex-1 rounded-xl border border-zinc-800 bg-zinc-950 px-4 py-2 text-sm text-white outline-none placeholder:text-zinc-500 focus:border-[#FF5C28] focus:ring-2 focus:ring-[#FF5C28]/30"
+              className="flex-1 rounded-xl border border-slate-200 bg-white px-4 py-2 text-sm text-slate-900 outline-none placeholder:text-slate-400 focus:border-[#7B189F] focus:ring-2 focus:ring-[#7B189F]/30"
               disabled={isBusy}
             />
             {isBusy ? (
               <button
                 type="button"
                 onClick={() => stop()}
-                className="rounded-xl border border-zinc-800 bg-zinc-900 px-4 py-2 text-sm font-medium text-zinc-200 hover:border-[#FF5C28]"
+                className="rounded-xl border border-slate-200 bg-white px-4 py-2 text-sm font-medium text-slate-700 hover:border-[#7B189F]"
               >
                 Stop
               </button>
@@ -390,13 +392,17 @@ export function ChatApp() {
               <button
                 type="submit"
                 disabled={!input.trim() && !imageFile}
-                className="rounded-xl bg-[#FF5C28] px-4 py-2 text-sm font-medium text-black hover:bg-[#ff7347] disabled:opacity-40"
+                className="rounded-xl bg-[#7B189F] px-4 py-2 text-sm font-medium text-white hover:bg-[#9333A5] disabled:opacity-40"
               >
                 Send
               </button>
             )}
           </div>
         </form>
+
+        <div className="mt-6">
+          <PartnerLogos />
+        </div>
       </main>
     </div>
   );

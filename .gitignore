@@ -36,6 +36,16 @@ yarn-error.log*
 # Sanitized template is safe to commit so teammates know which keys to set.
 !.env.example
 
+# Saved reference webpages used to mine Wayfair brand cues + partner
+# logos. The 4 partner logos we actually ship live in public/partners/.
+# The raw saved-page bundles are huge and not needed at runtime.
+Beat The Clock Agent Hack.html
+Beat The Clock Agent Hack_files/
+Wayfair.com*.html
+Wayfair.com*_files/
+*Hackathon Notes.docx
+~$*.docx
+
 # vercel
 .vercel
 
