@@ -5,6 +5,7 @@ import { DefaultChatTransport, type UIMessage } from "ai";
 import { useEffect, useMemo, useRef, useState } from "react";
 import SiteHeader from "@/src/components/SiteHeader.jsx";
 import SiteFooter from "@/src/components/SiteFooter.jsx";
+import MarkdownText from "@/src/components/MarkdownText.jsx";
 
 type Mode = "chat" | "agent";
 
@@ -43,15 +44,25 @@ function MessagePart({
   part,
   messageId,
   index,
+  role,
 }: {
   part: UIMessage["parts"][number];
   messageId: string;
   index: number;
+  role: UIMessage["role"];
 }) {
   if (part.type === "text") {
-    return (
-      <p className="whitespace-pre-wrap text-sm leading-relaxed">{part.text}</p>
-    );
+    // User messages render as-is so the prompt the user typed shows
+    // exactly as they typed it. Assistant messages flow through the
+    // markdown renderer so #/##/###/**/lists/code/links style properly.
+    if (role === "user") {
+      return (
+        <p className="whitespace-pre-wrap text-sm leading-relaxed">
+          {part.text}
+        </p>
+      );
+    }
+    return <MarkdownText>{part.text}</MarkdownText>;
   }
 
   if (part.type === "file" && part.mediaType?.startsWith("image/")) {
@@ -310,6 +321,7 @@ export function ChatApp() {
                     part={part}
                     messageId={message.id}
                     index={index}
+                    role={message.role}
                   />
                 ))}
               </div>
