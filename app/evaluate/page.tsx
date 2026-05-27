@@ -1,6 +1,6 @@
 import Link from "next/link";
 import { App as EvaluateApp } from "@/components/App";
-import PartnerLogos from "@/src/components/PartnerLogos.jsx";
+import SiteFooter from "@/src/components/SiteFooter.jsx";
 
 // Partner's order-evaluation UI lives here so the SetShip ops dashboard
 // at "/" can deep-link into a specific order. The page itself is a thin
@@ -41,7 +41,7 @@ export default function EvaluatePage() {
       </nav>
       <EvaluateApp />
       <div className="mx-auto max-w-7xl px-4 pb-8 sm:px-6 lg:px-8">
-        <PartnerLogos />
+        <SiteFooter />
       </div>
     </>
   );

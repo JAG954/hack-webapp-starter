@@ -10,7 +10,7 @@ import BottleneckLeaderboard from "./components/BottleneckLeaderboard.jsx";
 import SupplierRiskPanel from "./components/SupplierRiskPanel.jsx";
 import AgentRecommendationFeed from "./components/AgentRecommendationFeed.jsx";
 import OrderDetailDrawer from "./components/OrderDetailDrawer.jsx";
-import PartnerLogos from "./components/PartnerLogos.jsx";
+import SiteFooter from "./components/SiteFooter.jsx";
 import { useDashboardData } from "./data/useDashboardData.js";
 
 function formatLastUpdated(date) {
@@ -176,13 +176,8 @@ export default function App() {
           onSelectOrder={setSelectedOrderId}
         />
 
-        {/* Row 5: partner logo strip */}
-        <PartnerLogos />
-
-        <footer className="pb-4 pt-2 text-center text-[11px] text-slate-500">
-          SetShip Agent · {source === "live" ? "live backend" : "mock data"} ·
-          backend: GET /dashboard-summary
-        </footer>
+        {/* Row 5: rich footer — event details, track, builders, partner logos */}
+        <SiteFooter />
       </main>
 
       <OrderDetailDrawer

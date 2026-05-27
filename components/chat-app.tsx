@@ -4,7 +4,7 @@ import { useChat } from "@ai-sdk/react";
 import { DefaultChatTransport, type UIMessage } from "ai";
 import { useEffect, useMemo, useRef, useState } from "react";
 import SiteHeader from "@/src/components/SiteHeader.jsx";
-import PartnerLogos from "@/src/components/PartnerLogos.jsx";
+import SiteFooter from "@/src/components/SiteFooter.jsx";
 
 type Mode = "chat" | "agent";
 
@@ -401,7 +401,7 @@ export function ChatApp() {
         </form>
 
         <div className="mt-6">
-          <PartnerLogos />
+          <SiteFooter />
         </div>
       </main>
     </div>
