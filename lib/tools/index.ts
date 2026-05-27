@@ -1,5 +1,8 @@
 import { tool } from "ai";
 import { z } from "zod";
+import { setshipTools } from "@/lib/tools/setship-tools";
+
+export { setshipTools } from "@/lib/tools/setship-tools";
 
 /**
  * Example tools for the hackathon starter.
@@ -100,6 +103,7 @@ export const runLongTask = tool({
 export const chatTools = {
   getWeather,
   calculate,
+  ...setshipTools,
 };
 
 export const agentTools = {
@@ -107,4 +111,5 @@ export const agentTools = {
   calculate,
   webSearch,
   runLongTask,
+  ...setshipTools,
 };
